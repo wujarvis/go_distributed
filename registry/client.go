@@ -48,6 +48,7 @@ func (suh serviceUpdateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+	fmt.Printf("Updated received [Added url]: %v, [Removed url]: %v\n", p.Added, p.Removed)
 	prov.Update(p)
 }
 
