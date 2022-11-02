@@ -21,7 +21,7 @@ func (fl fileLog) Write(data []byte) (int, error) {
 }
 
 func Run(destination string) {
-	log = stlog.New(fileLog(destination), "go: ", stlog.LstdFlags) // filelog 已经实现了io.Write接口
+	log = stlog.New(fileLog(destination), "[go] - ", stlog.LstdFlags) // filelog 已经实现了io.Write接口
 }
 
 func RegisterHandlers() {
