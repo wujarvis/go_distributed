@@ -98,7 +98,7 @@ func (studentsHandler) renderStudent(w http.ResponseWriter, r *http.Request, id 
 	}
 
 	var s grades.Student
-	err = json.NewDecoder(res.Body).Decode(s)
+	err = json.NewDecoder(res.Body).Decode(&s)
 	if err != nil {
 		return
 	}
@@ -141,7 +141,7 @@ func (studentsHandler) rederGrades(w http.ResponseWriter, r *http.Request, id in
 		log.Println("Failed to retrieve instance of grading service: ", err)
 		return
 	}
-	res, err := http.Post(fmt.Sprintf("%v/students/%v", serviceURL, id), "application/json", bytes.NewBuffer(data))
+	res, err := http.Post(fmt.Sprintf("%v/students/%v/grades", serviceURL, id), "application/json", bytes.NewBuffer(data))
 	if err != nil {
 		log.Println("Failed to save grade to grading service: ", err)
 	}
