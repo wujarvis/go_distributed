@@ -8,6 +8,9 @@ import (
 	"distributed/service"
 	"fmt"
 	stlog "log"
+
+	"net/http"
+	_ "net/http/pprof"
 )
 
 func main() {
@@ -43,6 +46,8 @@ func main() {
 	if logProvider, err := registry.GetProvider(registry.LogService); err != nil {
 		log.SetClientLogger(logProvider, r.ServiceName)
 	}
+
+	go http.ListenAndServe("localhost:9000", nil)
 
 	<-ctx.Done()
 	fmt.Println("Shutting down portal.")
